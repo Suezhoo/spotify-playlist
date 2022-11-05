@@ -6,6 +6,9 @@ let token;
 // 4NepCfIQDBifrAKHCuTnJq?si=25cc2fd13d104cad
 // 5AGEjbB4biEBlSXDhUI2ZU?si=74d6bcc8595541e0
 
+// Playlist URL
+// https://open.spotify.com/playlist/4NepCfIQDBifrAKHCuTnJq?si=25cc2fd13d104cad&nd=1
+
 window.onload = async () => {
     initHTML();
     initEventListeners();
@@ -24,9 +27,16 @@ function initEventListeners() {
     const submitBTN = document.querySelector('#submit');
 
     submitBTN.addEventListener('click', () => {
-        const playlistID = document.querySelector('#playlist-id').value;
-        if (playlistID == '') console.log('Wrong id');
-        else getPlaylist(playlistID, token);
+        const playlist = document.querySelector('#playlist-id').value;
+        if (playlist == '') return console.log('Empty input');
+
+        // Accept either ID or URL
+        let id;
+        if (playlist.indexOf('https://open.spotify.com/playlist/') == 0) {
+            id = playlist.substring(playlist.lastIndexOf('/') + 1);
+        } else id = playlist;
+
+        getPlaylist(id, token);
     });
 }
 
@@ -47,7 +57,7 @@ async function getToken() {
  * @param {*} token
  */
 async function getPlaylist(id, token) {
-    fetch('http://localhost:1337/playlist/?id=' + id, {
+    await fetch('http://localhost:1337/playlist/?id=' + id, {
         method: 'GET',
         headers: {
             authorization: token,
@@ -55,9 +65,10 @@ async function getPlaylist(id, token) {
     })
         .then((res) => {
             if (res.status == 200) return res.json();
-            else console.log(res);
+            else return console.log(res);
         })
         .then((data) => {
+            if (data == undefined) return console.log('Error with displaying data');
             document.querySelector('.playlist-info').innerHTML = `
             <div class="result">
                 <div class="playlist-card">
