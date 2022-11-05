@@ -18,8 +18,8 @@ window.onload = async () => {
 
 function initHTML() {
     document.querySelector('.playlist-info').innerHTML = `<h1 class="title">Playlist Backup</h1>
-    <p class="description">Want to backup your playlists? All we need is the playlist ID and we will export your tracks into a single file.</p>
-    <input type="text" name="playlist-id" id="playlist-id" placeholder="Playlist ID" required autofocus value='4NepCfIQDBifrAKHCuTnJq?si=25cc2fd13d104cad'/>
+    <p class="description">Want to backup your playlists? All we need is the playlist ID or URL and we will export your tracks into a single file.</p>
+    <input type="text" name="playlist-id" id="playlist-id" placeholder="Playlist ID / URL" required autofocus />
     <div class="button" id="submit">Submit</div>`;
 }
 
@@ -37,6 +37,13 @@ function initEventListeners() {
         } else id = playlist;
 
         getPlaylist(id, token);
+    });
+
+    const discordDiv = document.querySelector('.discord');
+    discordDiv.addEventListener('click', () => {
+        const tag = document.querySelector('#name').innerHTML;
+        navigator.clipboard.writeText(tag);
+        alert(`Copied to clipboard: ${tag}`);
     });
 }
 
