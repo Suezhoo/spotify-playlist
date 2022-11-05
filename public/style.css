@@ -1,3 +1,11 @@
+:root {
+    --black: #000101;
+    --dark: #191918;
+    --white: #fefffe;
+    --green: #1ed661;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
 *,
 *::before,
 *::after {
@@ -11,32 +19,128 @@ body {
     width: 100vw;
 }
 
-header {
-    /* Center items */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*  */
-    height: 75px;
-    background-color: #333;
-}
-
 main {
-    /* Center items */
     display: flex;
     justify-content: center;
     align-items: center;
-    /*  */
-    height: calc(100vh - 150px);
-    background-color: #aaa;
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark);
+    color: var(--white);
 }
 
-footer {
-    /* Center items */
+.playlist-id-card {
+    display: flex;
+    height: 75%;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.playlist-id-card .column {
+    flex: 50%;
+    max-width: 50%;
+}
+
+.playlist-id-card .socials {
+    background-color: lightblue;
+}
+
+.playlist-id-card .playlist-info {
+    background-color: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 0px 3rem;
+}
+
+.playlist-id-card .playlist-info p {
+    text-align: center;
+    opacity: 90%;
+    font-size: 1rem;
+}
+
+.playlist-id-card .playlist-info label {
+    width: 100%;
+}
+
+.playlist-id-card .playlist-info input[type='text'] {
+    width: 100%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 2px solid var(--dark);
+    color: var(--white);
+    padding: 0.5rem 0;
+    transition: ease-in 500ms;
+}
+
+.playlist-id-card .playlist-info input[type='text']::placeholder {
+    color: var(--white);
+    opacity: 75%;
+}
+
+.button {
+    padding: 0.5rem 2rem;
+    background-color: var(--green);
+    border-radius: 25px;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.playlist-info .result {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*  */
-    height: 75px;
-    background-color: #333;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.playlist-info .result img {
+    height: 160px;
+}
+
+.playlist-info .result p {
+    text-align: left;
+}
+
+.playlist-info .result .details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.playlist-card {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.playlist-info .result .tracks {
+    border-spacing: 0.5rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.playlist-info .result .tracks .first {
+    width: 10%;
+}
+
+.playlist-info .result .tracks tbody {
+    width: 100px;
+}
+
+.playlist-info .result .tracks th {
+    text-align: left;
+}
+
+.playlist-info .result .tracks img {
+    height: 32px;
+}
+
+.playlist-info .result .tracks .track-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
