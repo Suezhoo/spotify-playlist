@@ -110,14 +110,17 @@ server.get('/playlist/export', async (req, res) => {
             fileData += `${name} ~ ${albumName} ~ ${calcDuration.getMinutes()}:${calcDuration.getSeconds()} ~ ${addedAt} ~ ${spotifyUrl} \n`;
         }
         // Create file
-        const fileName = `playlist-${playlist.data.name}-${playlist.data.owner.id}-backup.txt`;
+        const fileName = `playlist-${playlist.data.name}-${playlist.data.owner.display_name}-backup.txt`;
         fs.writeFileSync(fileName, fileData, (err) => {
             if (err) console.log(err);
             else console.log('File written.');
         });
         const filePath = `${__dirname}/${fileName}`;
         console.log('Downloading: ' + filePath);
-        res.download(filePath);
+        res.download(filePath, (err) => {
+            if (err) return console.log(err);
+            fs.rmSync(filePath);
+        });
         // Remove file
     } catch (err) {
         console.log(err);
