@@ -109,7 +109,7 @@ async function getPlaylist(id, token) {
                 document.querySelector('.tracks-body').insertAdjacentHTML('beforeend', rowString);
             }
 
-            const button = `<div class="button" id="export">Export</div>`;
+            const button = `<a href='http://localhost:1337/playlist/export?id=${id}&token=${token}' class="button" id="export">Export</a>`;
 
             document.querySelector('.playlist-info').insertAdjacentHTML('beforeend', button);
         });
